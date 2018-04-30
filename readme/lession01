@@ -1,0 +1,9 @@
+# 学习了v-model,v-for,v-on三个命令：
+
+- v-model 为Vue里面可以双向绑定的变量定义指令；在标签上定义为：v-model = "content" ，其中content表示一个双向绑定的变量。注意这里不需要用双层大括号；
+在Vue里面就是data里面的一个变量即可。 
+
+- v-for 表示一个for循环的指令；
+
+- v-on 表示绑定一个页面控件事件的指令 如，单击事件绑定为； v-on:click="functaoinName" 即可、
+

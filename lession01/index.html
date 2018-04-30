@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="content">
+        <button v-on:click="clickbutfun()">提交</button>
+
+        <ul>
+            <li v-for="item in lists">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+       var app = new Vue({
+           el: '#app',
+           data: {
+               lists : [],
+               content : ''
+           },
+           methods:{
+               clickbutfun:function(){
+                //    app.$data.lists.push(app.$data.content)
+                //    app.$data.content = ''
+                this.lists.push(this.content)
+               }
+           }
+       })
+    </script>
+</body>
+</html>
