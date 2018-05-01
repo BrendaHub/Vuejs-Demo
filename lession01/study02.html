@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了用帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>{{fullname + '  ' + age}}</div>
+    </div>
+    
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                firstName: "Mac",
+                lastName: "Lee",
+                fullname: 'Mac Lee',
+                age: 39
+            },
+            watch: {
+                firstName: function() {
+                    console.log('firstname change')
+                    this.fullname = this.firstName + '  ' + this.lastName;
+                },
+                lastName: function() {
+                    console.log("lastName change")
+                    this.fullname = this.firstName + '  ' + this.lastName;
+                }
+            }
+            //纯方法的方法实现， 不建议
+            // methods: {
+            //     //这种方式只是一个方法调用， 没有computed效率高；
+            //     fullname:function(){
+            //         return this.firstName + '  '+ this.lastName;
+            //     }
+            // }
+            //这种方式，带有缓存；  建议使用；
+            // computed: {
+            //     fullname: function() {
+            //         console.log('计算了一次')
+            //         return  this.firstName + '  ' + this.lastName;
+            //     }
+            // }
+        })
+    </script>
+</body>
+</html>

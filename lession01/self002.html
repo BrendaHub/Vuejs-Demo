@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <input type="text" v-model="inputValue" @delete="handleInputDel">
+        <button @click="handleBtnClick">提交</button>
+        <ul>
+            <todo-item v-bind:iteminfo="item" 
+                       v-bind:index="index"
+                       v-for="(item, index) in items" 
+                       @delete="handleBtnDelete"></todo-item>
+        </ul>
+    </div>
+    <script>
+      var TodoItem = {
+          props : ['iteminfo', 'index'],
+          template : "<li @click='handleItemclick'>{{iteminfo}}, {{index}}</li>",
+          methods : {
+            handleItemclick : function () {
+                //在子组件里注册一个delete监听事件，父组件就可以监听到
+                //在指定的组件上注册事件；
+                this.$emit("delete",this.index)
+            }
+          }
+      }
+      var root = new Vue({
+          el : "#root",
+          components : {
+              TodoItem : TodoItem
+          },
+          data : {
+            inputValue : '',
+            items : []
+          },
+          methods : {
+            handleBtnClick : function () {
+                this.items.push(this.inputValue)
+                this.inputValue = ''
+            },
+            handleBtnDelete : function (args) {
+                this.items.splice(args,1)
+            },
+            handleInputDel : function(){
+                console.info('监听到了del事件')
+            }
+          }
+      })
+    </script>
+</body>
+</html>

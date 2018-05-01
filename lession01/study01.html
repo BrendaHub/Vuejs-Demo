@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了用帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+   <div id="app-2"><span :title="message" :style="substyle">
+        鼠标悬停几秒钟查看此处动态绑定的提示信息！
+   </span></div>
+   <script>
+       var app = new Vue({
+           el : "#app-2",
+           data : {
+               message : '页面加载于 ' + new Date().toLocaleString(),
+               substyle : "color:blue;"
+           },
+           //创建完成的钩子函数
+           created:function(){
+               console.info('App 对象已经创建。' + this.message + '   '+ this.substyle)
+           },
+           //关联挂载完成的钩子函数
+           mounted : () => {
+            console.info('App mounted' )
+           },
+           //更新的钩子函数
+           updated : () => {
+            console.info('App updated' )
+           },
+           //销毁的钩子函数 
+           destroyed : () => {
+            console.info('App destoryed' )
+           }
+           
+       })
+       //$watch是用来监听Vue对象中的属性变化。
+       app.$watch ('message', function(newValue, oldValue){
+           app.$data.substyle = 'color:red;';
+           console.info('newvalue = ' + newValue+'   =  oldValue = ' + oldValue)
+       })
+   </script>
+</body>
+</html>

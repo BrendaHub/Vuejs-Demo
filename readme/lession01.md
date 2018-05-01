@@ -60,3 +60,10 @@ TodoItem ->  todo-item
 
 定义组件后， 需要将数据传递给相应组件， 可以采用指令，v-bind来实现
 v-bind 动态地绑定一个或多个特性，或一个组件 prop 到表达式
+
+*注： v-bind可以简写成为:content*
+如： v-bind:content="item"  表示将item的值绑定给content这个变量中，在组里面采用props里面的数组奕量content接收
+可简写为 :content = "item" 即可。
+
+# $watch函数
+ 用来监听vm里数据的变化；
