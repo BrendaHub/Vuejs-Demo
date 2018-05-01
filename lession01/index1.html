@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="content">
+        <button @click="handleOnClick">提交</button>
+        <ul>
+            <todo-item v-bind:iteminfo="item" v-for="item in lists">
+
+            </todo-item>
+        </ul>
+    </div>
+    <script>
+        //采用局部的组件来实现todolist
+        var TotoItem = {
+            props : ['iteminfo'],
+            template : "<li>{{iteminfo}}</li>"
+        }
+
+        var app = new Vue({
+            el: "#app",
+            components:{
+                TodoItem :TotoItem
+            },
+            data:{
+                content : '',
+                lists:[]
+            },
+            methods :{
+                handleOnClick:function(){
+                    console.info('>>>> '+this.content)
+                    this.lists.push(this.content);
+                    this.content = ''
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -10,13 +10,21 @@
 <body>
     <div id="app">
         <input type="text" v-model="content">
-        <button v-on:click="clickbutfun()">提交</button>
+        <!-- <button v-on:click="clickbutfun()">提交</button> -->
+        <button @click="clickbutfun()">提交</button>
 
         <ul>
-            <li v-for="item in lists">{{item}}</li>
+            <!-- <li v-for="item in lists">{{item}}</li> -->
+            <ul-item v-bind:iteminfo="item" v-for="item in lists">
+            </ul-item>
         </ul>
     </div>
     <script>
+        //创建一个全局的Vue组件
+        Vue.component("UlItem",{
+            props:['iteminfo'],
+            template:"<li>{{iteminfo}}</li>"
+        })
        var app = new Vue({
            el: '#app',
            data: {
@@ -28,6 +36,7 @@
                 //    app.$data.lists.push(app.$data.content)
                 //    app.$data.content = ''
                 this.lists.push(this.content) ;
+                this.content = ''
                }
            }
        })
