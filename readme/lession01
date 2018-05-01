@@ -57,3 +57,6 @@ Vue.component("UlItem",{
 如下：
 UlItem ->   ul-item
 TodoItem ->  todo-item
+
+定义组件后， 需要将数据传递给相应组件， 可以采用指令，v-bind来实现
+v-bind 动态地绑定一个或多个特性，或一个组件 prop 到表达式
