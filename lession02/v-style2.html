@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .Actived {
+            color: red;
+        }
+        .ActivedOne {
+            font-size: 34rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="root" @click="handleOnClick"
+                    :class="[actived]">
+        Hello World!
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                actived: '',
+                // activedOne: 'ActivedOne'
+            },
+            methods: {
+                handleOnClick: function() {
+                    console.log('actived = ' + this.actived)
+                    this.actived = this.actived === '' ? "Actived" : '';
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了用帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        {{fullName + ' > ' + age}}
+    </div>
+    <script>
+        var vm = new Vue(
+            {
+                el: "#root",
+                data: {
+                    firstName: 'Mac',
+                    lastName: 'Lee',
+                    age: 89
+                },
+                computed: {
+                    //如果要用插值的方式显示数据，需要提供get,set方法
+                    fullName: {
+                        get: function() {
+                            return this.firstName + '  ' + this.lastName;
+                        },
+                        set: function(value) {
+                            console.log('获取到了设置的值 为' + value);
+                            var v_arr = value.split(' ')
+                            this.firstName = v_arr[0];
+                            this.lastName = v_arr[1];
+                        }
+                    }
+                }
+            }
+        )
+    </script>
+</body>
+</html>
