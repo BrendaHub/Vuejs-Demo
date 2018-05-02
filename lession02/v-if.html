@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- <div v-if="isshow">{{content}}</div> -->
+        <div v-if="isshow === 'a'">this is A </div>
+        <div v-else-if="isshow === 'b'">This is B </div>
+        <div v-else>this is others</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                isshow: 'a',
+                content: "Hello World!",
+            }
+        })
+    </script>
+</body>
+</html>

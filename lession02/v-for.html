@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <template v-for="(item, index) of list" data-test="flag">
+                <div>
+                    {{item.text}}--{{item.id}}--{{index}}
+                </div>
+                <div>
+                    {{item.text}}--{{item.id}}--{{index}}
+                </div>
+        </template>
+
+        <template v-for="(item, key, index) of obj">
+            {{item}} ---- {{key}} --- {{index}} <br/>
+        </template>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                //可以修改数组内容的方法有：
+                //pop push shift unshift reverse sort
+                list:[
+                    {id:"01212109",
+                    text:"Dell"},
+                    {id:"01212112",
+                    text:"MR."},
+                    {id:"01212123",
+                    text:"Brenda"},
+                ],
+                obj: {
+                    name: "中国",
+                    age: "20000亿",
+                    email: "aa@adsfl.com",
+                    box: "smaill"
+                },
+                arr:[2,6,7,8,9,5,3]
+            }
+        })
+    </script>
+</body>
+</html>
