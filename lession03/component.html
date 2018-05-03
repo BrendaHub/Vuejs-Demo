@@ -17,6 +17,13 @@
                 <tr is="row"></tr>
             </tbody>
         </table>
+        <table>
+            <tbody>
+                <tr is="com01"></tr>
+                <tr is="com01"></tr>
+                <tr is="com01"></tr>
+            </tbody>
+        </table>
     </div>
     <script>
         Vue.component(
@@ -25,6 +32,14 @@
             }
             
         )
+        //这里说明了在子组件里面如果使用data属性时，必须是个函数而不直接是个对象；切记
+        Vue.component('com01',{
+            data: function() {
+                return {conte1nt:"this is col template info!",name:'chenhj beijing info'}
+            },
+            template: "<tr><td>{{conte1nt + '  ---- ' + name}}</td></tr>"
+        })
+
         var vm = new Vue({
             el: "#root"
         })
