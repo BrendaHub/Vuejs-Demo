@@ -12,3 +12,6 @@
 ```
 中括号里面的是一个JS表达式变量， 要通过调整actived的字符串的字面值来达到显示的目的；
 
+# Vue.set('对象名‘， key, value)
+
+# vm.$set('对象名’， key, value)
