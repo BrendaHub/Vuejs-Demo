@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <validate @change="handleEvClick"></validate>
+        <subcom @change-event="handleC"></subcom>
+    </div>
+
+    <script>
+        var _validate = {
+           // props: ['child'],//如果这里想对child的数据进行较验的话，则需要如下写法：
+            props: {
+                child: {//props字符串校验例子
+                    required: false,
+                    type: String,
+                    default: '11999',
+                    validator: function(value){
+                        return (value.length > 5)
+                    }
+                }
+            },
+            template: "<div @click='handleAA'>{{child}}</div>",
+            methods: {
+                handleAA: function() {
+                    console.log('asdfasdf')
+                    this.$emit('change')
+                }
+            }
+        }
+
+        var subcom = {
+            template: "<div @click='handleTempClick'>adsf</div>",
+            methods: {
+                handleTempClick: function() {
+                    console.log('发送事件了。。。。')
+                    this.$emit('change-event')
+                }
+            }
+        }
+
+        var vm = new Vue({
+            el: "#root",
+            components: {
+                validate: _validate,
+                subcom: subcom
+            },
+            methods: {
+                handleEventClick: function() {
+                    console.log('来了哦。 ')
+                },
+                handleEventClick1: function() {
+                    console.log("点这个了。 。。。。 ")
+                },
+                handleC: function() {
+                    console.log("哈哈。 是我哦。。。")
+                },
+                handleEvClick: function() {
+                    console.log(',,,,,,,,,,,,,,,,,,,,,,')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

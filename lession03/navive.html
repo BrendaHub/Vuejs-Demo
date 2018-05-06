@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <child @click.native="handleClick"></child>
+    </div>
+    <script>
+        Vue.component('child', {
+            // template: "<div @click='handleSubClick'>child</div>",
+            //在子组件的事情上添加.native 表示是子组件的原生事件。 
+            
+            template: "<div>child</div>",
+            methods: {
+                handleSubClick: function() {
+                    alert('sub click')
+                    this.$emit('click')
+                }
+            }
+        })
+        var vm = new Vue({
+            el: "#root",
+            methods: {
+                handleClick:  function() {
+                    alert('parent click')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

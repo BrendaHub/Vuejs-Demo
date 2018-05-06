@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <counter :count01="1"></counter>
+        <counter :count01="3"></counter>
+    </div>
+    <script>
+        var counter = {
+            props: ['count01'],
+            template: "<div @click='handleDivClick'>{{count01}}</div>",
+            methods: {
+                handleDivClick: function() {
+                    console.log(this.count01)
+                    this.count01++//这里会报警告的。 不建议直接修改父组件传递过来的值。
+                }
+            }
+        }
+        var vm = new Vue({
+            el: "#root",
+            components: {
+                counter: counter
+            }
+
+        })
+    </script>
+</body>
+</html>

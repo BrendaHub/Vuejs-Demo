@@ -9,22 +9,43 @@
 </head>
 <body>
     <div id="root">
-        <confTemp></confTemp>
+        <!--注意在Vue中，:开头的表达式， 后面的值 就是js表过式， 可以直接显示Vue的data中的值；-->
+        <aaaa :num21="number" @change11="handlechangeInfo"></aaaa>
+        <!-- 子组件发起的事件监听的话， 必须只能在当前的组件中监听获取 -->
+        <div>{{backNumber}}</div>
     </div>
     <script>
         //自定义一个模板
         var confTemp = {
+            //父组件传过来的值 ，子组件需要通过props来接收
+            props: ["num21"],
             data: function() {
                 return {
-                    count: 5
+                    count: this.num21
                 }
             },
-            template: "<div>{{count}}</div>"
+            template: "<div @click='handletempclick'>{{count}}--{{this.num21}}</div>",
+            methods: {
+                handletempclick: function() {
+                    console.log('aaaa')
+                    this.$emit('change11', this.num21);
+                }
+            }
         }
         var vm = new Vue({
             el: "#root",
+            data: {
+                number: 9,
+                backNumber : 0
+            },
             components: {
-                confTemp: confTemp
+                aaaa: confTemp
+            },
+            methods: {
+                handlechangeInfo: function(param) {
+                    console.log('param=' + param)
+                    this.backNumber = param
+                }
             }
         })
     </script>
