@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .prointed {
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <component01 :count="0" 
+                     :class="{prointed: isprointed}"
+                     >
+                    </component01>
+    </div>
+    <script>
+        var component01 = {
+            //Vue在子组件了绑定了一个属性， count。在子组件里可以接收，
+            //采用pros进行接收；
+            props: ['count'],
+            data: function() {
+                return {
+                    number: this.count
+                }
+            },
+            template: "<div @click='handleTempClick'>{{number}}, count:{{count}}</div>",
+            methods: {
+                handleTempClick: function() {
+                    console.log('点我了'+ this.number)
+                    this.number++
+                    this.count++
+                }
+            }
+        }
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                isprointed: true
+            },
+            components: {//注意如果在这里引入外部组件时， 是components。
+                component01: component01
+            },
+        })
+    </script>
+</body>
+</html>
