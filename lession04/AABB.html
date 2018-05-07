@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <counter content="Dell"></counter>
+        <counter content="Lee"></counter>
+    </div>
+    <script>
+        //声明一个组件间的总线
+        Vue.prototype.bus = new Vue();
+        Vue.component("counter", {
+            props: {
+                content: String
+            },
+            data: function() {
+                return {
+                    selfContent: this.content
+                }
+            },
+            template: "<div @click='handleClick'>{{selfContent}}</div>",
+            methods: {
+                handleClick: function() {
+                    console.log(this.content)
+                    this.bus.$emit("change", this.content)//在子组件上发出一个监听事件change， 但是这个子组件之间需要事先采用钩子函数，事先监听这个事件。
+                }
+            },
+            mounted: function() {
+                var self = this;
+                this.bus.$on("change", function(msg) {
+                    console.log('子组件收到了change事件监听' + msg)
+                    self.selfContent = msg;
+                })
+            }
+        })
+        var vm = new Vue({
+            el: "#root",
+            // methods: {
+            //     handleChange: function(mesg) {
+            //         console.log('msg=' +mesg)
+            //     }
+            // }
+        })
+    </script>
+</body>
+</html>
