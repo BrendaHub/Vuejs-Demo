@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="root">
+        <numcom @change="handleNumChange"></numcom>
+        <numcom @change="handleNumChange"></numcom>
+        <div>
+            总和： {{total}}
+        </div>
+    </div>
+    <script>
+        Vue.component('numcom',{
+            data: function() {//这里是可以返回一个json对象的
+                return {
+                    number: 0 
+                }
+            },
+            template: "<div @click='handleTempClick'>{{number}}</div>",//在子组件里面写的的事件方法， 需要在子组件里面定义出相关的方法
+            methods:{
+                handleTempClick: function() {
+                    console.log('子组件被点击了。 每点击一下数字加1，这里有一个问题，如果获取当前子组件的值 。 ')
+                    this.number++
+                    //在当前组件是发射事件，数据修改事件
+                    alert(this.number)
+                    this.$emit('change', this.number);
+                }
+            }
+        })
+        var vm = new Vue({
+            el: "#root",
+            methods: {
+                handleNumChange: function(param) {
+                    //点击了组件的，修改了数据的值
+                    console.log('组件的内容修改了。 修改为： ' + param)
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
