@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <component1 ref="component1"></component1>
+        <div ref="hello" @click="handleDivClick">hello</div>
+    </div>
+    <script>
+        Vue.component('component1', {
+            template: "<div @click='handleComClick'>count</div>",
+            methods: {
+                handleComClick: function() {
+                    console.log('sub method' + this.$refs.component1)
+                }
+            }
+        })
+        var vm = new Vue({
+            el: "#root",
+            methods: {
+                // handleComClick: function() {
+                //     console.log(this.$refs.component1)
+                // }
+                handleDivClick: function() {
+                    console.log('>>>> ' + this.$refs.hello)
+                    console.log('<<>>>>>>>>>>>>>>> = ' + (this.$refs.component1))
+                }
+            }
+        })
+    </script>
+</body>
+</html>
