@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vuejs的动画</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./animate.css">
+</head>
+<body>
+    <div id="root">
+        <transition appear enter-active-class="animated bounce"
+                    leave-active-class="animated shake"
+                    appear-active-class="animated swing">
+            <child v-if="show"></child>
+        </transition>
+        <button @click="handleBtnClick">动画效果</button>
+    </div>
+    <script>
+        Vue.prototype.bus = new Vue();
+        Vue.component("child", {
+            data: function() {
+                return {
+                    show: true
+                }
+            },
+            template: "<div>Mr.brenda</div>",
+            mounted: function() {
+                this.bus.$emit('bclick', this.show)
+            }
+        })
+
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                show: true
+            },
+            methods: {
+                handleBtnClick: function() {
+                    console.log('this.show= ' + this.show)
+                    this.show = !this.show;
+                }
+            },
+            mounted: function() {
+                this.bus.$on('bclick', function() {
+                    console.log('bus 事件来了。 。。。。')
+                })
+            }
+        })
+    </script>
+</body>
+</html>

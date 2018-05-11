@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue完整动画的封装</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <fade :show="show">
+            <span>Hello Animate</span>
+        </fade>
+        <fade :show="show">
+            <H2>Hello Component</H2>
+        </fade>
+        <button @click="handleClick">显示、隐藏</button>
+    </div>
+    <script>
+        Vue.component("fade", {
+            props: ['show'],
+            template: `
+                <transition @before-enter="handleBeforeEnter"
+                            @enter="handerEnter"
+                            @after-enter="handerAfterEnter">
+                    <slot v-if="show"></slot>
+                </transition>
+            `,
+            methods: {
+                handleBeforeEnter: function(el) {
+                    el.style.color = 'red'
+                },
+                handerEnter: function(el, done) {
+                    setTimeout(() => {
+                        el.style.color = 'green'
+                        done();
+                    }, 2000);
+                },
+                handerAfterEnter: function(el) {
+                    
+                    setTimeout(() => {
+                        el.style.color = '#000'
+                    }, 4000);
+                }
+            }
+        })
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                show: false
+            },
+            methods: {
+                handleClick: function() {
+                    this.show = !this.show;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
